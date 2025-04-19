@@ -1,11 +1,18 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from "react-router-dom";
 import './Dashboard.css';
-import { FaCompass, FaBolt, FaExclamationTriangle, FaQuestionCircle, FaMemory, FaUserEdit, FaGlobe, FaMicrophone, FaSmile, FaPaperclip, FaArrowCircleRight } from 'react-icons/fa';
+import { FaCompass, FaBolt, FaExclamationTriangle, FaQuestionCircle, FaMemory, FaUserEdit, FaGlobe, FaMicrophone, FaSmile, FaPaperclip, FaArrowCircleRight, FaBars } from 'react-icons/fa';
 import { FaSignOutAlt } from 'react-icons/fa';
 
 const Dashboard = () => {
   const [selectedTopic, setSelectedTopic] = useState(null);
+  const [sidebarOpen, setSidebarOpen] = useState(false);
+
+
+
+  const toggleSidebar = () => {
+    setSidebarOpen(!sidebarOpen);
+  };
 
   const topics = [
     'Create Html Game Environment...',
@@ -21,8 +28,8 @@ const Dashboard = () => {
 
   const handleTopicClick = (topic) => {
     setSelectedTopic(topic);
+    setSidebarOpen(false); // Close sidebar on topic click
   };
-
 
   const navigate = useNavigate();
 
@@ -33,7 +40,8 @@ const Dashboard = () => {
 
   return (
     <div className="dashboard-container">
-      <div className="sidebar">
+      <div className={`sidebar ${sidebarOpen ? 'open' : ''}`}>
+        <br/>
         <h2 className="app-title">CHAT A.I+</h2>
         <button className="new-chat" onClick={() => setSelectedTopic(null)}>+ New chat</button>
 
@@ -61,6 +69,17 @@ const Dashboard = () => {
           </div>
         </div>
       </div>
+
+      {/* Hamburger Menu */}
+      <button
+        style={{ color: sidebarOpen ? 'white' : 'black' }}
+        className={`sidebar-toggle fixed top-4 z-50 text-2xl transition-all duration-300 ${sidebarOpen ? 'left-64' : 'left-4'
+          }`}
+        onClick={toggleSidebar}
+      >
+        &#9776;
+      </button>
+      <br/>
 
       <div className="dashboard-main">
         {selectedTopic ? (

@@ -1,7 +1,8 @@
 /* Dashboard.css */
+
 html, body {
   height: 100%;
-  overflow: hidden;
+  overflow-x: hidden;
 }
 body {
   margin: 0;
@@ -407,6 +408,10 @@ body {
   display: flex;
   align-items: center;
 }
+.sidebar.open {
+  left: 0;
+  display: flex;
+}
 
 .profile-img {
   width: 36px;
@@ -461,4 +466,78 @@ body {
   visibility: visible;
   opacity: 1;
 }
+@media (max-width: 768px) {
+  .dashboard-container {
+    flex-direction: column;
+  }
 
+  .sidebar {
+    position: fixed;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    transform: translateX(-100%);
+    z-index: 999;
+    width: 220px;
+    box-shadow: 2px 0 5px rgba(0,0,0,0.1);
+  }
+  .sidebar.open {
+    transform: translateX(0);
+  }
+  .sidebar-toggle {
+    position: fixed;
+    top: 15px;
+    left: 15px;
+    font-size: 26px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    z-index: 1000;
+    background: transparent;
+  }
+
+  .dashboard-main {
+    padding: 16px;
+  }
+
+  .tiles-wrapper {
+    flex-direction: column;
+    gap: 16px;
+    max-width: 100%;
+  }
+
+  .tile-column-left {
+    width: 100%;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: space-around;
+  }
+
+  .tile-left {
+    width: 48%;
+    height: auto;
+  }
+
+  .tile-grid-right {
+    grid-template-columns: 1fr;
+    max-width: 100%;
+    gap: 12px;
+  }
+
+  .ai-bubble {
+    width: auto;
+    max-width: 100%;
+  }
+
+  .intro-card {
+    height: auto;
+    padding: 20px;
+  }
+
+  .textbar-container {
+    max-width: 100%;
+    flex-wrap: wrap;
+    padding: 10px 15px;
+  }
+}
